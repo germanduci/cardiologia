@@ -33,6 +33,12 @@
                                 onblur="this.value=this.value.toUpperCase();">
                                 <?php echo form_error('txtcodigo','<span class="help-block">','</span>')?>
                             </div> 
+                            <div class="form-group <?php echo !empty(form_error('txtdni_paciente'))? 'has-error': ''?>">
+                                <label for="codigo">Email</label>
+                                <input type="email" id="txtmail" name="txtmail" class="form-control" value="<?php echo !empty(form_error('txtcodigo'))?
+                                set_value('txtmail'):$estudioedit->email ?>">
+                                <?php echo form_error('txtcodigo','<span class="help-block">','</span>')?>
+                            </div> 
                             <div class="form-group">
                                 <label for="descripcion">Fecha Estudio</label>
                                 <input type="date" id="txtfecha_estudio" name="txtfecha_estudio" class="form-control" value="<?php echo $estudioedit->fecha_estudio?>"

@@ -19,13 +19,16 @@
                                     <th>ID</th>                                    
                                     <th>Estudio</th>
                                     <th>DNI Paciente</th>
+                                    <th>Email</th>
                                     <th>Archivo</th>
-                                    <th>Usuario</th>
+                                    <th>Usuario Alta</th>
                                     <th>Fecha Estudio</th>
                                     <th>Fecha Carga</th>
                                     <th>Estado</th>
-                                    <th>Fecha Envío</th>                                   
-                                    <th>Opciones</th>
+                                    <th>Fecha Envío</th>
+                                    <th>Usuario Envio</th>                                   
+                                    <th>Modificar</th>
+                                    <th>Enviar</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -35,13 +38,14 @@
                                             <td><?php echo $atributos->id_estudio;?></td>
                                             <td><?php echo $atributos->tipo_estudio;?></td>
                                             <td><?php echo $atributos->dni_paciente;?></td>
+                                            <td><?php echo $atributos->email;?></td>
                                             <td>
                                                 <div class="btn-group>">                          
                                                     <a href="<?php echo base_url();?>./uploads/files/<?php echo $atributos->archivo;?>" target="_blank" class="btn btn-success">
                                                         <span class="fa fa-file-pdf "></span></a>                                                        
                                                 </div>                        
                                             </td>
-                                            <td><?php echo $atributos->username_usuario;?></td>
+                                            <td><?php echo $atributos->user_upload;?></td>
                                             <td><?php echo $atributos->fecha_estudio;?></td>
                                             <td><?php echo $atributos->fecha_subida;?></td>
                                             <?php if ($atributos->estado_envio==1){
@@ -51,14 +55,28 @@
                                                 $style='class="label label-danger"';
                                                 echo "<td><p><span $style><font style= 'vertical-align: inherit;'>Sin Enviar</font></span></p>";   
                                             }?>
-                                            <td><?php echo $atributos->fecha_envio;?>                                            
+                                            
+                                            <td><?php echo $atributos->fecha_envio;?></td>
+                                            <td>
+                                                <?php if (!empty($atributos->user_send)){
+                                                        echo $atributos->user_send;
+                                            }else{
+                                                echo "";
+                                            }?>
+                                            </td>                                          
                                             <?php $data = $atributos->id_estudio."*".$atributos->tipo_estudio."*".$atributos->dni_paciente."*".$atributos->fecha_subida; ?>
                                             <td>
                                                 <div class="btn-group>">                                            
                                                     <a href="<?php echo base_url();?>mantenimiento/cestudio/cedit/<?php echo $atributos->id_estudio;?>" class="btn btn-warning">
-                                                        <span class="fa fa-pencil"></span></a>                                           
-                                                    <a href="<?php echo base_url();?>mantenimiento/cestudio/cenviar/<?php echo $atributos->id_estudio;?>" class="btn btn-success">
-                                                        <span class="fa fa-paper-plane "></span></a>
+                                                    <span class="fa fa-pencil"></span></a>
+                                            </td> 
+                                            <td>                                           
+                                                <div class="btn-group>">
+                                                    <?php if (str_contains($atributos->email, 'sin@correo')){                                                        
+                                                            echo '<a href="" class="btn btn-danger"><span class="fa-solid fa-triangle-exclamation"></span></a>';
+                                                        }else{
+                                                            echo '<a href="<?php echo base_url();?>mantenimiento/cestudio/enviarMail/<?php echo $atributos->id_estudio;?>" class="btn btn-success"><span class="fa fa-paper-plane "></span></a>';
+                                                        }?>                                                                                                         
                                                 </div>
                                             </td>
                                         </tr>                                 

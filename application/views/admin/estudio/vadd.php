@@ -32,7 +32,7 @@
                             </div>
                             <div class="form-group <?php;?>">
                                 <label for="nombre">Fecha Estudio</label>
-                                <input type="date" id="txtfecha_estudio" name="txtfecha_estudio" class="form-control" value="<?php echo set_value('fecha')?>">
+                                <input type="date" id="txtfecha_estudio" name="txtfecha_estudio" placeholder="dd-mm-yyyy" min="2020-01-01" max="2030-12-31" class="form-control" value="<?php echo set_value('fecha')?>">
                             </div>                            
                             <div class="form-group <?php;?>">
                                 <label for="descripcion">Archivo Adjunto</label>

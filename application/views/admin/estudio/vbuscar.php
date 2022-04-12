@@ -2,7 +2,7 @@
     <section class="content-header">
         <h1>
             <a href="<?php echo base_url();?>mantenimiento/cestudio/">Estudios Cardiológicos</a>
-            <small>Nuevo</small>
+            <small>Buscar por documento de paciente</small>
         </h1>
     </section>
     <section class="content">

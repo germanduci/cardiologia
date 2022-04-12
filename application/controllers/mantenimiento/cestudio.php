@@ -9,6 +9,7 @@ class Cestudio extends CI_Controller{
             redirect(base_url()); 
         }
         $this->load->model('mestudio');
+        $this->load->model('mreporte');
     }
 
     public function index(){
@@ -22,15 +23,14 @@ class Cestudio extends CI_Controller{
         $this->load->view('layouts/footer');      
     }
 
-    public function cadd(){       
-
+    public function cadd(){
         $this->load->view('layouts/header');
         $this->load->view('layouts/aside');
         $this->load->view('admin/estudio/vadd');
         $this->load->view('layouts/footer');  
     }
 
-    public function cbuscar(){  
+    public function cbuscar(){
         $this->load->view('layouts/header');
         $this->load->view('layouts/aside');
         $this->load->view('admin/estudio/vbuscar');
@@ -48,7 +48,14 @@ class Cestudio extends CI_Controller{
         $this->load->view('layouts/footer');         
     }
 
-    public function cenviar(){    
+    public function creporte(){
+        $this->load->view('layouts/header');
+        $this->load->view('layouts/aside');
+        $this->load->view('admin/estudio/vreporte');
+        $this->load->view('layouts/footer');  
+    }    
+    
+    public function cenviar(){
         $data = array(
             'estudioindex'=> $this->mestudio->mselectestudio(),
         );        
@@ -58,16 +65,25 @@ class Cestudio extends CI_Controller{
         $this->load->view('layouts/footer');  
     }
 
+    public function ctodos(){
+        $data = array(
+            'estudioindex'=> $this->mestudio->mselectestudiotodos(),
+        );        
+        $this->load->view('layouts/header');
+        $this->load->view('layouts/aside');
+        $this->load->view('admin/estudio/venviar',$data);
+        $this->load->view('layouts/footer');  
+    } 
+
     public function cinsert(){
         
         $dnipaciente        = $this->input->post('txtdni_paciente');
         $fecha_estudio      = $this->input->post('txtfecha_estudio');
         $tipo_estudio       = $this->input->post('txttipo_estudio');
         date_default_timezone_set('America/Argentina/Mendoza');                
-        $date               = date('d-m-Y');
-        $idusuario_subido   = $this->session->userdata('idusuario');
-        $correo             = $this->mestudio->buscarEmail($this->input->post('txtdni_paciente'));
-              
+        $date               = date('Y-m-d');
+        $idusuario_subido   = $this->session->userdata('user_name');
+        $correo             = $this->mestudio->buscarEmail($this->input->post('txtdni_paciente'));              
         if(!empty($correo[0]->email)){
         $email              = $correo[0]->email;
         }else{
@@ -79,9 +95,9 @@ class Cestudio extends CI_Controller{
         $config['allowed_types']='pdf';
         $this->load->library('upload', $config);
         if($this->upload->do_upload('txtfile')){
-           $archivo = $this->upload->data('file_name');    
+            $archivo = $this->upload->data('file_name');    
         }else{
-           echo $this->upload->display_errors();
+            echo $this->upload->display_errors();
         }
         
         if($this->form_validation->run()){
@@ -192,45 +208,6 @@ class Cestudio extends CI_Controller{
         }   
     }
 
-    public function cUpdateEnvio($id_estudio){ 
-        $estudioActual = array($this->mestudio->midupdateestudio($id_estudio));
-        
-        
-        $dni_paciente       = $estudioActual[0]->dni_paciente;
-        $tipo_estudio       = $estudioActual[0]->tipo_estudio;
-        $fecha_estudio      = $estudioActual[0]->fecha_estudio;
-        $fecha_subida       = $estudioActual[0]->fecha_subida;
-        $fecha_envio        = date('d-m-Y');
-        $estado_envio       = 1;
-        $archivo            = $estudioActual[0]->archivo;
-        $idusuario_envio    = $this->session->userdata('idusuario');
-        $idusuario_subido   = $estudioActual[0]->idusuario_subido;
-        $email              = $estudioActual[0]->email;        
-        
-                 $data = array(
-                    'id_estudio'        =>$id_estudio,
-                    'dni_paciente'      =>$dni_paciente,
-                    'tipo_estudio'      =>$tipo_estudio,
-                    'fecha_estudio'     =>$fecha_estudio,
-                    'fecha_subida'      =>$fecha_subida,
-                    'fecha_envio'       =>$fecha_envio,
-                    'estado_envio'      =>$estado_envio,
-                    'archivo'           =>$archivo,
-                    'idusuario_envio'   =>$idusuario_envio,
-                    'idusuario_subido'  =>$idusuario_subido,
-                    'email'             =>$email
-                );
-                $res = $this->mestudio->mupdateestudio($id_estudio,$data);
-                if($res){
-                    $this->session->set_flashdata('correcto','Se guardo correctamente');
-                    redirect(base_url().'mantenimiento/cestudio');
-                }else{
-                    $this->session->set_flashdata('error','No se pudo actualizar el estudio');
-                    redirect(base_url().'mantenimiento/cestudio');
-                }
-        
-    }
-
     public function enviarMail($id_estudio){
         $data = array($this->mestudio->midupdateestudio($id_estudio));
         $dni_paciente = $data[0]->dni_paciente;
@@ -242,7 +219,7 @@ class Cestudio extends CI_Controller{
     }
 
     /*
-    public function enviarEmail($correo,$archivo){    
+    public function enviarEmail($correo,$archivo){
         $config['protocol'] = "smtp";
         $config['smtp_host'] = 'correo.hospital.uncu.edu.ar';
         $config['smtp_port'] = 25;
@@ -272,5 +249,92 @@ class Cestudio extends CI_Controller{
         var_dump( $upload_data['full_path'].$archivo );
         return $this->email->send();   
     }*/
+
+    public function entregaEstudio($id_estudio){
+        $data = array($this->mestudio->midupdateestudio($id_estudio));
+        $dni_paciente = $data[0]->dni_paciente;
+        $archivo = $data[0]->archivo;        
+        $correo = $data[0]->email;
+        $estado_envio='3';                
+        $this->cUpdateEntrega($id_estudio);
+    }
+    
+    public function cUpdateEntrega($id_estudio){
+        $estudioActual = array($this->mestudio->midupdateestudio($id_estudio));
+        
+        
+        $dni_paciente       = $estudioActual[0]->dni_paciente;
+        $tipo_estudio       = $estudioActual[0]->tipo_estudio;
+        $fecha_estudio      = $estudioActual[0]->fecha_estudio;
+        $fecha_subida       = $estudioActual[0]->fecha_subida;
+        $fecha_envio        = date('Y-m-d');
+        $estado_envio       = 2;
+        $archivo            = $estudioActual[0]->archivo;
+        $idusuario_envio    = $this->session->userdata('user_name');
+        $idusuario_subido   = $estudioActual[0]->idusuario_subido;
+        $email              = $estudioActual[0]->email;        
+        
+                 $data = array(
+                    'id_estudio'        =>$id_estudio,
+                    'dni_paciente'      =>$dni_paciente,
+                    'tipo_estudio'      =>$tipo_estudio,
+                    'fecha_estudio'     =>$fecha_estudio,
+                    'fecha_subida'      =>$fecha_subida,
+                    'fecha_envio'       =>$fecha_envio,
+                    'estado_envio'      =>$estado_envio,
+                    'archivo'           =>$archivo,
+                    'idusuario_envio'   =>$idusuario_envio,
+                    'idusuario_subido'  =>$idusuario_subido,
+                    'email'             =>$email
+                );
+                $res = $this->mestudio->mupdateestudio($id_estudio,$data);
+                if($res){
+                    $this->session->set_flashdata('correcto','Se guardo correctamente');
+                    redirect(base_url().'mantenimiento/cestudio');
+                }else{
+                    $this->session->set_flashdata('error','No se pudo actualizar el estudio');
+                    redirect(base_url().'mantenimiento/cestudio');
+                }
+        
+    }
+
+    public function cUpdateEnvio($id_estudio){
+        $estudioActual = array($this->mestudio->midupdateestudio($id_estudio));
+        
+        
+        $dni_paciente       = $estudioActual[0]->dni_paciente;
+        $tipo_estudio       = $estudioActual[0]->tipo_estudio;
+        $fecha_estudio      = $estudioActual[0]->fecha_estudio;
+        $fecha_subida       = $estudioActual[0]->fecha_subida;
+        $fecha_envio        = date('Y-m-d');
+        $estado_envio       = 1;
+        $archivo            = $estudioActual[0]->archivo;
+        $idusuario_envio    = $this->session->userdata('user_name');
+        $idusuario_subido   = $estudioActual[0]->idusuario_subido;
+        $email              = $estudioActual[0]->email;        
+        
+                 $data = array(
+                    'id_estudio'        =>$id_estudio,
+                    'dni_paciente'      =>$dni_paciente,
+                    'tipo_estudio'      =>$tipo_estudio,
+                    'fecha_estudio'     =>$fecha_estudio,
+                    'fecha_subida'      =>$fecha_subida,
+                    'fecha_envio'       =>$fecha_envio,
+                    'estado_envio'      =>$estado_envio,
+                    'archivo'           =>$archivo,
+                    'idusuario_envio'   =>$idusuario_envio,
+                    'idusuario_subido'  =>$idusuario_subido,
+                    'email'             =>$email
+                );
+                $res = $this->mestudio->mupdateestudio($id_estudio,$data);
+                if($res){
+                    $this->session->set_flashdata('correcto','Se guardo correctamente');
+                    redirect(base_url().'mantenimiento/cestudio');
+                }else{
+                    $this->session->set_flashdata('error','No se pudo actualizar el estudio');
+                    redirect(base_url().'mantenimiento/cestudio');
+                }
+        
+    }    
 }
 ?>

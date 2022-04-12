@@ -22,6 +22,28 @@
     <!--Font Awesome Kit German Duci-->
     <script src="https://kit.fontawesome.com/5a64481c2e.js" crossorigin="anonymous"></script>
     
+    <!--DATEPICKER JS-->
+    <link rel='stylesheet' id='admin-css'  href='admin.css' type='text/css' media='all' />
+    
+    <link rel='stylesheet' id='colors-fresh-css'  href='colors-fresh.css' type='text/css' media='all' />
+
+    <link rel="stylesheet" href="http://code.jquery.com/ui/1.9.1/themes/base/jquery-ui.css" />
+
+    
+
+    
+
+    <link rel="stylesheet" href="/resources/demos/style.css" /> 
+
+    <script>
+    $(function(){
+        $( ".datepicker" ).datepicker();
+        $("#icon").click(function() { 
+            $(".datepicker").datepicker("show");            
+        })
+    });
+    </script>
+    <!--/DATEPICKER JS-->
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
     <!-- Site wrapper -->
@@ -32,7 +54,7 @@
                 <!-- mini logo for sidebar mini 50x50 pixels -->
                 <span class="logo-mini"><b>H</b>U</span>
                 <!-- logo for regular state and mobile devices -->
-                <span class="logo-lg"><b>Cardiología HU</b></span>
+                <span class="logo-lg"><b><i>Cardiología HU</i></b></span>
             </a>
             <!-- Header Navbar: style can be found in header.less -->
             <nav class="navbar navbar-static-top">
@@ -50,7 +72,9 @@
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                 <img src="<?php echo base_url()?>assets/template/dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
                                <span class="hidden-xs"><?php echo ucwords($this->session->userdata('nombre'))?></span>
+                               
                             </a>
+                            
                             <ul class="dropdown-menu">
                                 <li class="user-body">
                                     <div class="row">

@@ -1,34 +1,27 @@
 <?php
 class Mestudio extends CI_Model{
+    ///BUSCA TODOS LOS RESULTADOS PENDIENTES DE ENVIO O ENTREGA
     public function mselectestudio(){
-        $sql='SELECT e.*, us.user user_upload FROM estudio e JOIN usuario us ON e.idusuario_subido=us.id_usuario WHERE e.estado_envio=0;';
+        $sql='SELECT e.* FROM estudio e WHERE e.estado_envio=0;';
         $resultado=$this->db->query($sql);        
         $resultado->result();
-        return $resultado->result();  
-        //AND e.idusuario_envio=us.id_usuario
-        //SELECT e.*, us.user user_upload, us.user user_send FROM estudio e JOIN usuario us ON e.idusuario_subido=us.id_usuario AND e.idusuario_envio=us.id_usuario WHERE estado_envio=0;
-
-
+        return $resultado->result();       
     }
-
+    ///BUSCA TODOS LOS RESULTADOS
+    public function mselectestudiotodos(){
+        $sql='SELECT e.* FROM estudio e group by id_estudio';
+        $resultado=$this->db->query($sql);        
+        $resultado->result();
+        return $resultado->result();
+    }
+    ///BUSCA RESULTADO POR DNI
     public function mbuscarestudio($dni_paciente){
-        
-        /*$this->db->select('e.*');
-        $this->db->from('estudio e');       
-        $this->db->where('e.dni_paciente =',$dni_paciente);        
-        $resultado = $this->db->get('estudio');
-        return $resultado->result();*/
-
-        $sql='SELECT e.*, us.user user_upload, us.user user_send 
-        FROM estudio e 
-        JOIN usuario us ON e.idusuario_subido=us.id_usuario 
-        AND e.idusuario_envio=us.id_usuario 
-        WHERE dni_paciente=? GROUP BY id_estudio';
+        $sql='SELECT e.* FROM estudio e WHERE dni_paciente=? GROUP BY id_estudio';
         $resultado=$this->db->query($sql,$dni_paciente);  
         $resultado->result();
         return $resultado->result();
     }    
-
+    ///INSERTA
     public function minsertestudio($data){
         return $this->db->insert('estudio',$data);
     }
@@ -43,7 +36,7 @@ class Mestudio extends CI_Model{
         $this->db->where('id_estudio',$id_estudio);
         return $this->db->update('estudio',$data);
     }
-
+    ///BUSCA EMAIL DE PACIENTE EN DB SALUTTE
     public function buscarEmail($dni_paciente){
         $this->salutte = $this->load->database("salutte",TRUE);
         
@@ -54,5 +47,28 @@ class Mestudio extends CI_Model{
         $resultado = $this->salutte->get('persona');
         return $resultado -> result();
     }
+
+    ///CUENTA RESULTADOS ENVIADOS POR MAIL
+    public function informesEnviados(){        
+        $sql1='SELECT id_estudio FROM estudio WHERE estado_envio=1;';
+        $enviados=$this->db->query($sql1);        
+        $enviados->result();        
+        
+        $sql2='SELECT id_estudio FROM estudio WHERE estado_envio=2;';
+        $entregados=$this->db->query($sql2);        
+        $entregados->result();        
+        
+        $sql3='SELECT id_estudio FROM estudio WHERE estado_envio=0;';
+        $noenviados=$this->db->query($sql3);        
+        $noenviados->result();        
+
+        $resultado = array (
+            'enviados'      => $enviados->num_rows(),
+            'entregados'    => $entregados->num_rows(),
+            'noenviados'    => $noenviados->num_rows(),
+        );
+        return $resultado;   
+    }
+
 }
 ?>

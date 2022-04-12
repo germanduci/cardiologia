@@ -1,6 +1,6 @@
         <footer class="main-footer">
             <div class="pull-right hidden-xs">
-                <b>Version</b> 2.4.0
+                <b>Version</b> 0.9a
             </div>
             <strong>Copyright &copy;2022 <a href="https://hospital.uncuyo.edu.ar/">HU TICS</a>.</strong> 
         </footer>

@@ -1,6 +1,6 @@
 <div class="content-wrapper">
     <section class="content-header">
-        <h1>Estudios Cardiológicos<small>Pendientes de Envio</small></h1>
+        <h1>Estudios Cardiológicos</h1>
     </section>            
     <section class="content">                
         <div class="box box-solid">
@@ -27,8 +27,9 @@
                                     <th>Estado</th>
                                     <th>Fecha Envío</th>
                                     <th>Usuario Envio</th>                                   
-                                    <th>Modificar</th>
-                                    <th>Enviar</th>
+                                    <th class="text-center" >Modificar</th>
+                                    <th class="text-center" >Enviar</th>
+                                    <th class="text-center" >Entrega Personal</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -45,39 +46,41 @@
                                                         <span class="fa fa-file-pdf "></span></a>                                                        
                                                 </div>                        
                                             </td>
-                                            <td><?php echo $atributos->user_upload;?></td>
+                                            <td><?php echo $atributos->idusuario_subido;?></td>
                                             <td><?php echo $atributos->fecha_estudio;?></td>
                                             <td><?php echo $atributos->fecha_subida;?></td>
                                             <?php if ($atributos->estado_envio==1){
                                                 $style='class="label label-success"';
-                                                echo "<td><p><span $style><font style= 'vertical-align: inherit;'>Enviado</font></span></p>";
+                                                echo "<td><p><span $style><font style= 'vertical-align: inherit;'>Mail enviado</font></span></p>";
+                                            }else if($atributos->estado_envio==2){
+                                                $style='class="label label-success"';
+                                                echo "<td><p><span $style><font style= 'vertical-align: inherit;'>Entrega en persona</font></span></p>";
                                             }else{
                                                 $style='class="label label-danger"';
-                                                echo "<td><p><span $style><font style= 'vertical-align: inherit;'>Sin Enviar</font></span></p>";   
-                                            }?>
-                                            
+                                                echo "<td><p><span $style><font style= 'vertical-align: inherit;'>Sin enviar</font></span></p>";
+                                            }?>                                            
                                             <td><?php echo $atributos->fecha_envio;?></td>
-                                            <td>
-                                                <?php if (!empty($atributos->user_send)){
-                                                        echo $atributos->user_send;
-                                            }else{
-                                                echo "";
-                                            }?>
-                                            </td>                                          
+                                            <td><?php if (!empty($atributos->idusuario_envio)){echo $atributos->idusuario_envio;}else{echo "";}?></td>
+
                                             <?php $data = $atributos->id_estudio."*".$atributos->tipo_estudio."*".$atributos->dni_paciente."*".$atributos->fecha_subida; ?>
-                                            <td>
+                                            <td class="text-center" >
                                                 <div class="btn-group>">                                            
                                                     <a href="<?php echo base_url();?>mantenimiento/cestudio/cedit/<?php echo $atributos->id_estudio;?>" class="btn btn-warning">
                                                     <span class="fa fa-pencil"></span></a>
                                             </td> 
-                                            <td>                                           
+                                            <td class="text-center" >                                           
                                                 <div class="btn-group>">
-                                                    <?php if (str_contains($atributos->email, 'sin@correo')){                                                        
-                                                            echo '<a href="" class="btn btn-danger"><span class="fa-solid fa-triangle-exclamation"></span></a>';
-                                                        }else{
-                                                            echo '<a href="<?php echo base_url();?>mantenimiento/cestudio/enviarMail/<?php echo $atributos->id_estudio;?>" class="btn btn-success"><span class="fa fa-paper-plane "></span></a>';
-                                                        }?>                                                                                                         
+                                                    <?php if (str_contains($atributos->email, 'sin@correo')){?>                                                       
+                                                            <a href="" class="btn btn-danger"><span class="fa-solid fa-triangle-exclamation"></span></a>
+                                                    <?php }else{?>
+                                                            <a href='<?php echo base_url();?>mantenimiento/cestudio/enviarMail/<?php echo $atributos->id_estudio;?>' class='btn btn-success'><span class='fa fa-paper-plane'></span></a>
+                                                    <?php }?>                                                                                                         
                                                 </div>
+                                            </td>
+                                            <td class="text-center" >
+                                                <div class="btn-group>">                                            
+                                                    <a href="<?php echo base_url();?>mantenimiento/cestudio/entregaEstudio/<?php echo $atributos->id_estudio;?>" class="btn btn-info">
+                                                    <span class="fa-solid fa-user-check"></span></a>
                                             </td>
                                         </tr>                                 
                                     <?php endforeach ?>

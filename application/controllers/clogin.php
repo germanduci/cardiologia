@@ -8,7 +8,7 @@
 
         public function index(){
             if($this->session->userdata('login')){
-                redirect(base_url().'cdashboard');
+                redirect(base_url().'index');
             }else{ 
             $this->load->view('admin/vlogin');
             }
@@ -31,7 +31,7 @@
                     'user_name' =>  $res->user
                 );
                 echo $this->session->set_userdata($data);
-                redirect(base_url().'cdashboard');
+                redirect(base_url().'index');
             }
         }
         

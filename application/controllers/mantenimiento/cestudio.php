@@ -15,8 +15,7 @@ class Cestudio extends CI_Controller{
     public function index(){
         $data = array(
             'estudioindex' => $this->mestudio->mselectestudio(),
-        );
-        
+        );        
         $this->load->view('layouts/header');
         $this->load->view('layouts/aside');
         $this->load->view('admin/estudio/venviar',$data);
@@ -99,7 +98,7 @@ class Cestudio extends CI_Controller{
         }else{
             echo $this->upload->display_errors();
         }
-        
+
         if($this->form_validation->run()){
             $data=array(
                 'dni_paciente'      =>      $dnipaciente,

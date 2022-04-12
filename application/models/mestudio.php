@@ -69,6 +69,5 @@ class Mestudio extends CI_Model{
         );
         return $resultado;   
     }
-
 }
 ?>

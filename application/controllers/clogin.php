@@ -29,7 +29,7 @@
                     'idrol'     =>  $res->idrol,
                     'login'     =>  TRUE,
                     'user_name' =>  $res->user
-                );
+                ); 
                 echo $this->session->set_userdata($data);
                 redirect(base_url().'index');
             }

@@ -5,7 +5,7 @@
             <strong>Copyright &copy;2022 <a href="https://hospital.uncuyo.edu.ar/">HU TICS</a>.</strong> 
         </footer>
     </div>
-    <!-- ./wrapper -->
+    
 <!-- jQuery 3 -->
 <script src="<?php echo base_url();?>assets/template/lightbox/dist/js/lightbox-plis-jquery.min.js"></script>
 <!-- Bootstrap 3.3.7 -->

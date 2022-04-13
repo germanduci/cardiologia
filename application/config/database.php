@@ -97,4 +97,22 @@ $db['default'] = array(
 
 ///Database info deleted for security reasons.
 
+$db['salutte'] = array(
+	'dsn'	=> '',
+	'hostname' => '172.22.112.17',
+	'username' => 'root',
+	'password' => 'sisnuevo.13',
+	'database' => 'salutte2',
+	'dbdriver' => 'mysqli',
+	'dbprefix' => '',
+	'pconnect' => TRUE,
+	'db_debug' => TRUE,
+	'cache_on' => FALSE,
+	'cachedir' => '',
+	'char_set' => 'utf8',
+	'dbcollat' => 'utf8_general_ci',
+	'swap_pre' => '',
+	'autoinit' => TRUE,	
+	'stricton' => FALSE,	
+);
 

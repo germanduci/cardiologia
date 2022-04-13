@@ -4,14 +4,13 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Cardiología HU</title>
-    <!-- Tell the browser to be responsive to screen width -->
+    
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-    <!-- Bootstrap 3.3.7 -->
+    
     <link rel="stylesheet" href="<?php echo base_url();?>assets/template/bootstrap/css/bootstrap.min.css">    
-    <!-- Theme style -->
+    
     <link rel="stylesheet" href="<?php echo base_url();?>assets/template/dist/css/AdminLTE.min.css">
-    <!-- AdminLTE Skins. Choose a skin from the css/skins
-    folder instead of downloading all of them to reduce the load. -->
+    
     <link rel="stylesheet" href="<?php echo base_url();?>assets/template/datatables.net-bs/css/dataTables.bootstrap.min.css">
 
     <link rel="stylesheet" href="<?php echo base_url();?>assets/template/dist/css/skins/_all-skins.min.css">
@@ -20,18 +19,13 @@
 
     <script src="<?php echo base_url();?>assets/template/jquery/jquery.min.js"></script>
     <!--Font Awesome Kit German Duci-->
-    <script src="https://kit.fontawesome.com/5a64481c2e.js" crossorigin="anonymous"></script>
-    
-    <!--DATEPICKER JS-->
+    <script src="https://kit.fontawesome.com/5a64481c2e.js" crossorigin="anonymous"></script>    
+
     <link rel='stylesheet' id='admin-css'  href='admin.css' type='text/css' media='all' />
     
     <link rel='stylesheet' id='colors-fresh-css'  href='colors-fresh.css' type='text/css' media='all' />
 
     <link rel="stylesheet" href="http://code.jquery.com/ui/1.9.1/themes/base/jquery-ui.css" />
-
-    
-
-    
 
     <link rel="stylesheet" href="/resources/demos/style.css" /> 
 
@@ -42,23 +36,17 @@
             $(".datepicker").datepicker("show");            
         })
     });
-    </script>
-    <!--/DATEPICKER JS-->
+    </script>   
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
-    <!-- Site wrapper -->
+   
     <div class="wrapper">
-        <header class="main-header">
-            <!-- Logo -->
-            <a href="../../index2.html" class="logo">
-                <!-- mini logo for sidebar mini 50x50 pixels -->
-                <span class="logo-mini"><b>H</b>U</span>
-                <!-- logo for regular state and mobile devices -->
+        <header class="main-header">            
+            <a href="../cestudio/index" class="logo">                
+                <span class="logo-mini"><b>H</b>U</span>                
                 <span class="logo-lg"><b><i>Cardiología HU</i></b></span>
-            </a>
-            <!-- Header Navbar: style can be found in header.less -->
-            <nav class="navbar navbar-static-top">
-                <!-- Sidebar toggle button-->
+            </a>            
+            <nav class="navbar navbar-static-top">               
                 <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
                     <span class="sr-only">Toggle navigation</span>
                     <span class="icon-bar"></span>
@@ -67,14 +55,11 @@
                 </a>
                 <div class="navbar-custom-menu">
                     <ul class="nav navbar-nav">
-                        <!-- User Account: style can be found in dropdown.less -->
                         <li class="dropdown user user-menu">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                <img src="<?php echo base_url()?>assets/template/dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
-                               <span class="hidden-xs"><?php echo ucwords($this->session->userdata('nombre'))?></span>
-                               
-                            </a>
-                            
+                               <i class="fa-solid fa-plus"></i>                                
+                               <span class="hidden-xs"><strong>Bienvenido:</strong> <?php echo $this->session->userdata('user_name')?></span>                                                          
+                            </a>                            
                             <ul class="dropdown-menu">
                                 <li class="user-body">
                                     <div class="row">
@@ -82,7 +67,6 @@
                                             <a href="<?php echo base_url();?>clogin/clogout"> Cerrar Sesión</a>
                                         </div>
                                     </div>
-                                    <!-- /.row -->
                                 </li>
                             </ul>
                         </li>

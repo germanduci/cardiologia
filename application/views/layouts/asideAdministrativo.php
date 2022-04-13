@@ -11,17 +11,15 @@
                                 <i class="fa fa-angle-left pull-right"></i>
                             </span>
                         </a>
-                        <ul class="treeview-menu">
-
-                            <li><a href="<?php echo base_url();?>mantenimiento/cestudio/cadd"><i class="fa fa-circle-o"></i> Subir Estudio</a></li> 
+                        <ul class="treeview-menu">                             
 
                             <li><a href="<?php echo base_url();?>mantenimiento/cestudio/cbuscar"><i class ="fa fa-circle-o"></i> Buscar Estudio </a></li>
 
-                            <li><a href="<?php echo base_url();?>mantenimiento/cestudio/cenviar"><i class ="fa fa-circle-o"></i> Enviar Estudios </a></li>
+                            <li><a href="<?php echo base_url();?>mantenimiento/cestudio/cenviar"><i class ="fa fa-circle-o"></i> Pendientes de envio </a></li>
                                
                             <li><a href="<?php echo base_url();?>mantenimiento/cestudio/ctodos"><i class ="fa fa-circle-o"></i> Todos los Estudios </a></li>                                                     
                         </ul>
-                    </li>                    
+                    </li>
                     <li class="treeview">
                         <a href="#">
                             <i class="fa fa-print"></i> <span>Reportes</span>
@@ -32,7 +30,7 @@
                         <ul class="treeview-menu">
                             <li><a href="<?php echo base_url();?>mantenimiento/cestudio/creporte"><i class ="fa fa-circle-o"></i>Reporte Estudios por fecha</a></li>
                         </ul>
-                    </li>                    
+                    </li>                
                 </ul>
             </section>
             <!-- /.sidebar -->

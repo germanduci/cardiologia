@@ -20,11 +20,15 @@ header("Content-Disposition: attachment; filename=reporte_cardio_$date.xls");
                             <th>ID </th>
                             <th>Estudio</th>
                             <th>DNI Paciente</th>
-                            <th>Usuario</th>
+                            <th>Medico</th>
                             <th>Fecha Estudio</th>
-                            <th>Fecha Carga</th>                                                                   
+                            <th>Fecha Carga</th>
+                            <th>Estado Env/Entrega</th>
+                            <th>Usuario Env/Entrega</th> 
+                            <th>Fecha Env/Entrega</th>                                                                  
                         </tr>
                     <?php foreach($estudio as $row){
+                        if($row->estado_envio=="0"){
                         echo '
                             <tr>
                                 <td>'.$row->id_estudio.'</td>
@@ -32,9 +36,38 @@ header("Content-Disposition: attachment; filename=reporte_cardio_$date.xls");
                                 <td>'.$row->dni_paciente.'</td>
                                 <td>'.$row->idusuario_subido.'</td>
                                 <td>'.$row->fecha_estudio.'</td>
-                                <td>'.$row->fecha_subida.'</td>                                
-                            </tr>
-                        ';
+                                <td>'.$row->fecha_subida.'</td>
+                                <td>Sin enviar</td>
+                                <td>'.$row->idusuario_envio.'</td>
+                                <td>'.$row->fecha_envio.'</td>                                
+                            </tr>';
+                        }elseif($row->estado_envio=="1"){
+                            echo '
+                            <tr>
+                                <td>'.$row->id_estudio.'</td>
+                                <td>'.$row->tipo_estudio.'</td>
+                                <td>'.$row->dni_paciente.'</td>
+                                <td>'.$row->idusuario_subido.'</td>
+                                <td>'.$row->fecha_estudio.'</td>
+                                <td>'.$row->fecha_subida.'</td>
+                                <td>Enviado</td>
+                                <td>'.$row->idusuario_envio.'</td>
+                                <td>'.$row->fecha_envio.'</td>                                
+                            </tr>';
+                        }else{
+                            echo '
+                            <tr>
+                                <td>'.$row->id_estudio.'</td>
+                                <td>'.$row->tipo_estudio.'</td>
+                                <td>'.$row->dni_paciente.'</td>
+                                <td>'.$row->idusuario_subido.'</td>
+                                <td>'.$row->fecha_estudio.'</td>
+                                <td>'.$row->fecha_subida.'</td>
+                                <td>Entregado</td>
+                                <td>'.$row->idusuario_envio.'</td>
+                                <td>'.$row->fecha_envio.'</td>                                
+                            </tr>';
+                        }                        
                     }?>
                 </table>                
             </div>

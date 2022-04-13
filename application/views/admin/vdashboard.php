@@ -22,7 +22,7 @@
                     <div class="info-box-content">
                         <span class="info-box-text">Informes NO entregados</span>
                         <span class="info-box-number"><?php echo $resultado['noenviados'];?></span>
-                    </div>
+                    </div>                    
             </div>
     </section>    
 </div>

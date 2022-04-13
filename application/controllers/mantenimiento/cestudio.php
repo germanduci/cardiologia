@@ -15,63 +15,167 @@ class Cestudio extends CI_Controller{
     public function index(){
         $data = array(
             'estudioindex' => $this->mestudio->mselectestudio(),
-        );        
-        $this->load->view('layouts/header');
-        $this->load->view('layouts/aside');
-        $this->load->view('admin/estudio/venviar',$data);
-        $this->load->view('layouts/footer');      
+        );
+        
+        if($this->session->userdata('id_rol')==8){
+            $this->load->view('layouts/header');
+            $this->load->view('layouts/asideMedico');
+            $this->load->view('admin/estudio/venviarMedico',$data);
+            $this->load->view('layouts/footer');
+            }
+        elseif($this->session->userdata('id_rol')==1){
+            $this->load->view('layouts/header');
+            $this->load->view('layouts/asideMedico');
+            $this->load->view('admin/estudio/venviar',$data);
+            $this->load->view('layouts/footer');
+            }
+        else{
+            $this->load->view('layouts/header');
+            $this->load->view('layouts/asideAdministrativo');
+            $this->load->view('admin/estudio/venviarAdministrativo',$data);
+            $this->load->view('layouts/footer');
+            }
     }
 
     public function cadd(){
+
+    if($this->session->userdata('id_rol')==8){
+        $this->load->view('layouts/header');
+        $this->load->view('layouts/asideMedico');
+        $this->load->view('admin/estudio/vadd');
+        $this->load->view('layouts/footer');
+        }
+    elseif($this->session->userdata('id_rol')==1){
         $this->load->view('layouts/header');
         $this->load->view('layouts/aside');
         $this->load->view('admin/estudio/vadd');
-        $this->load->view('layouts/footer');  
+        $this->load->view('layouts/footer');
+        }
+    else{
+        $this->load->view('layouts/header');
+        $this->load->view('layouts/asideAdministrativo');
+        $this->load->view('admin/estudio/vadd');
+        $this->load->view('layouts/footer');
+        }
     }
 
-    public function cbuscar(){
-        $this->load->view('layouts/header');
-        $this->load->view('layouts/aside');
-        $this->load->view('admin/estudio/vbuscar');
-        $this->load->view('layouts/footer');  
+    public function cbuscar(){        
+        
+        if($this->session->userdata('id_rol')==8){
+            $this->load->view('layouts/header');
+            $this->load->view('layouts/asideMedico');
+            $this->load->view('admin/estudio/vbuscar');
+            $this->load->view('layouts/footer');
+            }
+        elseif($this->session->userdata('id_rol')==1){
+            $this->load->view('layouts/header');
+            $this->load->view('layouts/aside');
+            $this->load->view('admin/estudio/vbuscar');
+            $this->load->view('layouts/footer');
+            }
+        else{
+            $this->load->view('layouts/header');
+            $this->load->view('layouts/asideAdministrativo');
+            $this->load->view('admin/estudio/vbuscar');
+            $this->load->view('layouts/footer');
+            }
     }
 
     public function cbusqueda(){
         $dni_paciente = $this -> input -> post('txtdni_paciente');
         $data = array(
             'estudioindex' =>$this->mestudio->mbuscarestudio($dni_paciente),
-        );
-        $this->load->view('layouts/header');
-        $this->load->view('layouts/aside');
-        $this->load->view('admin/estudio/venviar',$data);
-        $this->load->view('layouts/footer');         
+        );         
+        
+        if($this->session->userdata('id_rol')==8){
+            $this->load->view('layouts/header');
+            $this->load->view('layouts/asideMedico');
+            $this->load->view('admin/estudio/venviarMedico',$data);
+            $this->load->view('layouts/footer');
+            }
+        elseif($this->session->userdata('id_rol')==1){
+            $this->load->view('layouts/header');
+            $this->load->view('layouts/aside');
+            $this->load->view('admin/estudio/venviar',$data);
+            $this->load->view('layouts/footer');
+            }
+        else{
+            $this->load->view('layouts/header');
+            $this->load->view('layouts/asideAdministrativo');
+            $this->load->view('admin/estudio/venviarAdministrativo',$data);
+            $this->load->view('layouts/footer');
+            }
     }
 
-    public function creporte(){
-        $this->load->view('layouts/header');
-        $this->load->view('layouts/aside');
-        $this->load->view('admin/estudio/vreporte');
-        $this->load->view('layouts/footer');  
+    public function creporte(){         
+        
+        if($this->session->userdata('id_rol')==8){
+            $this->load->view('layouts/header');
+            $this->load->view('layouts/asideMedico');
+            $this->load->view('admin/estudio/vreporte');
+            $this->load->view('layouts/footer');
+            }
+        elseif($this->session->userdata('id_rol')==1){
+            $this->load->view('layouts/header');
+            $this->load->view('layouts/aside');
+            $this->load->view('admin/estudio/vreporte');
+            $this->load->view('layouts/footer');
+            }
+        else{
+            $this->load->view('layouts/header');
+            $this->load->view('layouts/asideAdministrativo');
+            $this->load->view('admin/estudio/vreporte');
+            $this->load->view('layouts/footer');
+            }
     }    
     
     public function cenviar(){
         $data = array(
             'estudioindex'=> $this->mestudio->mselectestudio(),
-        );        
-        $this->load->view('layouts/header');
-        $this->load->view('layouts/aside');
-        $this->load->view('admin/estudio/venviar',$data);
-        $this->load->view('layouts/footer');  
+        ); 
+
+        if($this->session->userdata('id_rol')==8){
+            $this->load->view('layouts/header');
+            $this->load->view('layouts/asideMedico');
+            $this->load->view('admin/estudio/venviarMedico',$data);
+            $this->load->view('layouts/footer');
+            }
+        elseif($this->session->userdata('id_rol')==1){
+            $this->load->view('layouts/header');
+            $this->load->view('layouts/aside');
+            $this->load->view('admin/estudio/venviar',$data);
+            $this->load->view('layouts/footer');
+            }
+        else{
+            $this->load->view('layouts/header');
+            $this->load->view('layouts/asideAdministrativo');
+            $this->load->view('admin/estudio/venviarAdministrativo',$data);
+            $this->load->view('layouts/footer');
+            }
     }
 
     public function ctodos(){
         $data = array(
             'estudioindex'=> $this->mestudio->mselectestudiotodos(),
-        );        
-        $this->load->view('layouts/header');
-        $this->load->view('layouts/aside');
-        $this->load->view('admin/estudio/venviar',$data);
-        $this->load->view('layouts/footer');  
+        );                
+        if($this->session->userdata('id_rol')==8){
+            $this->load->view('layouts/header');
+            $this->load->view('layouts/asideMedico');
+            $this->load->view('admin/estudio/venviarMedico',$data);
+            $this->load->view('layouts/footer');
+            }
+        elseif($this->session->userdata('id_rol')==1){
+            $this->load->view('layouts/header');
+            $this->load->view('layouts/aside');
+            $this->load->view('admin/estudio/venviar',$data);
+            $this->load->view('layouts/footer');
+            }
+        else{
+            $this->load->view('layouts/header');
+            $this->load->view('layouts/asideAdministrativo');
+            $this->load->view('admin/estudio/venviarAdministrativo',$data);
+            $this->load->view('layouts/footer');
+            }
     } 
 
     public function cinsert(){
@@ -128,11 +232,26 @@ class Cestudio extends CI_Controller{
     public function cedit($id_estudio){
         $data = array(
             'estudioedit'=>$this->mestudio->midupdateestudio($id_estudio)
-        );
-        $this->load->view('layouts/header');
-        $this->load->view('layouts/aside');
-        $this->load->view('admin/estudio/vedit',$data);
-        $this->load->view('layouts/footer');
+        );        
+
+        if($this->session->userdata('id_rol')==8){
+            $this->load->view('layouts/header');
+            $this->load->view('layouts/asideMedico');
+            $this->load->view('admin/estudio/vedit',$data);
+            $this->load->view('layouts/footer');
+            }
+        elseif($this->session->userdata('id_rol')==1){
+            $this->load->view('layouts/header');
+            $this->load->view('layouts/aside');
+            $this->load->view('admin/estudio/vedit',$data);
+            $this->load->view('layouts/footer');
+            }
+        else{
+            $this->load->view('layouts/header');
+            $this->load->view('layouts/asideAdministrativo');
+            $this->load->view('admin/estudio/vedit',$data);
+            $this->load->view('layouts/footer');
+            }
     }
 
     public function cupdate(){
@@ -212,12 +331,11 @@ class Cestudio extends CI_Controller{
         $dni_paciente = $data[0]->dni_paciente;
         $archivo = $data[0]->archivo;        
         $correo = $data[0]->email;        
-        $this->cUpdateEnvio($id_estudio);
-        /*
-        $this->enviarEmail($correo,$archivo);*/
+        $this->cUpdateEnvio($id_estudio);        
+        $this->enviarEmail($correo,$archivo);
     }
 
-    /*
+    
     public function enviarEmail($correo,$archivo){
         $config['protocol'] = "smtp";
         $config['smtp_host'] = 'correo.hospital.uncu.edu.ar';
@@ -233,8 +351,8 @@ class Cestudio extends CI_Controller{
         $config['upload_path'] = './uploads/files/';
         $config['allowed_types'] = 'pdf';
         $config['max_size'] = '100000';
-        $config['max_width']  = '1024';
-        $config['max_height']  = '768';
+        $config['max_width']  = '2048';
+        $config['max_height']  = '1536';
         $this->load->library('upload', $config);
         $this->upload->do_upload($archivo);
         $upload_data = $this->upload->data();
@@ -242,12 +360,12 @@ class Cestudio extends CI_Controller{
         $this->email->from('mesadeayuda@hospital.uncu.edu.ar', 'Hospital Universitario');
         $this->email->to($correo);        
         $this->email->subject('Informe Cardiologíco - Hospital Universitario');
-        $this->email->message('Se adjunta informe de estudio Cardiológico, tiene problemas para visualizarel mismo
+        $this->email->message('Se adjunta informe de estudio Cardiológico, tiene problemas para visualizar el mismo
         comuníquese al 4494220. Por favor no responda este correo.');
         $this->email->attach($upload_data['full_path'].$archivo);
         var_dump( $upload_data['full_path'].$archivo );
         return $this->email->send();   
-    }*/
+    }
 
     public function entregaEstudio($id_estudio){
         $data = array($this->mestudio->midupdateestudio($id_estudio));

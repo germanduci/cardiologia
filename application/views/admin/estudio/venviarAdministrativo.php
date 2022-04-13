@@ -26,8 +26,7 @@
                                     <th>Fecha Carga</th>
                                     <th>Estado</th>
                                     <th>Fecha Envío</th>
-                                    <th>Usuario Envio</th>                                   
-                                    <th class="text-center" >Modificar</th>
+                                    <th>Usuario Envio</th> 
                                     <th class="text-center" >Enviar</th>
                                     <th class="text-center" >Entrega Personal</th>
                                 </tr>
@@ -61,13 +60,7 @@
                                             }?>                                            
                                             <td><?php echo $atributos->fecha_envio;?></td>
                                             <td><?php if (!empty($atributos->idusuario_envio)){echo $atributos->idusuario_envio;}else{echo "";}?></td>
-
-                                            <?php $data = $atributos->id_estudio."*".$atributos->tipo_estudio."*".$atributos->dni_paciente."*".$atributos->fecha_subida; ?>
-                                            <td class="text-center" >
-                                                <div class="btn-group>">                                            
-                                                    <a href="<?php echo base_url();?>mantenimiento/cestudio/cedit/<?php echo $atributos->id_estudio;?>" class="btn btn-warning">
-                                                    <span class="fa fa-pencil"></span></a>
-                                            </td> 
+                                            <?php $data = $atributos->id_estudio."*".$atributos->tipo_estudio."*".$atributos->dni_paciente."*".$atributos->fecha_subida; ?>                                            
                                             <td class="text-center" >                                           
                                                 <div class="btn-group>">
                                                     <?php if (str_contains($atributos->email, 'sin@correo')){?>                                                       

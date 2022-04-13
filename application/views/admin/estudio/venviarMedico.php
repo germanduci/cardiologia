@@ -28,8 +28,6 @@
                                     <th>Fecha Envío</th>
                                     <th>Usuario Envio</th>                                   
                                     <th class="text-center" >Modificar</th>
-                                    <th class="text-center" >Enviar</th>
-                                    <th class="text-center" >Entrega Personal</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -67,21 +65,7 @@
                                                 <div class="btn-group>">                                            
                                                     <a href="<?php echo base_url();?>mantenimiento/cestudio/cedit/<?php echo $atributos->id_estudio;?>" class="btn btn-warning">
                                                     <span class="fa fa-pencil"></span></a>
-                                            </td> 
-                                            <td class="text-center" >                                           
-                                                <div class="btn-group>">
-                                                    <?php if (str_contains($atributos->email, 'sin@correo')){?>                                                       
-                                                            <a href="" class="btn btn-danger"><span class="fa-solid fa-triangle-exclamation"></span></a>
-                                                    <?php }else{?>
-                                                            <a href='<?php echo base_url();?>mantenimiento/cestudio/enviarMail/<?php echo $atributos->id_estudio;?>' class='btn btn-success'><span class='fa fa-paper-plane'></span></a>
-                                                    <?php }?>                                                                                                         
-                                                </div>
-                                            </td>
-                                            <td class="text-center" >
-                                                <div class="btn-group>">                                            
-                                                    <a href="<?php echo base_url();?>mantenimiento/cestudio/entregaEstudio/<?php echo $atributos->id_estudio;?>" class="btn btn-info">
-                                                    <span class="fa-solid fa-user-check"></span></a>
-                                            </td>
+                                            </td>                                            
                                         </tr>                                 
                                     <?php endforeach ?>
                                 <?php endif; ?>                              

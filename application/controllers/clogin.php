@@ -13,24 +13,29 @@
             $this->load->view('admin/vlogin');
             }
         }
-
+        
         public function clogeo(){
             $txtnombre  = $this->input->post('txtnombre');
             $txtpass    = $this->input->post('txtpass');
             $res        = $this->musuario->mlogeo($txtnombre,$txtpass);
             //var_dump($res);
+            
+            
             if(!$res){
                 $this->session->set_flashdata('error','El Usuario y/o contraseña son incorrectas');
                 redirect(base_url().'clogin');
             }else{
                 $data = array(
-                    'idusuario' =>  $res->id_usuario,
-                    'nombre'    =>  $res->nombre.' '.$res->apellido,
-                    'idrol'     =>  $res->idrol,
+                    'idusuario' =>  $res->user_id,
+                    'nombre'    =>  $res->user,
+                    'id_rol'     =>  $res->perfil_id,
                     'login'     =>  TRUE,
                     'user_name' =>  $res->user
                 ); 
+                
+                
                 echo $this->session->set_userdata($data);
+                
                 redirect(base_url().'index');
             }
         }

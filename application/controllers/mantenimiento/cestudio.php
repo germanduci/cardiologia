@@ -294,13 +294,13 @@ class Cestudio extends CI_Controller{
         $this->enviarEmail($correo,$archivo);
     }
 
-    
+    ///DATOS MODIFICADOS POR SEGURIDAD///
     public function enviarEmail($correo,$archivo){
         $config['protocol'] = "smtp";
-        $config['smtp_host'] = 'correo.hospital.uncu.edu.ar';
-        $config['smtp_port'] = 25;
-        $config['smtp_user'] = 'mesadeayuda@hospital.uncu.edu.ar'; //email desde donde se envía el email
-        $config['smtp_pass'] = 'Mza.2019+'; //password del email
+        $config['smtp_host'] = '///////////////////////';
+        $config['smtp_port'] = //////////////;
+        $config['smtp_user'] = '////////////////////////'; //email desde donde se envía el email
+        $config['smtp_pass'] = '///////////////////'; //password del email
         $config['mailtype'] = 'html';
         $config['charset'] = 'utf-8';
         $config['newline'] = "\r\n";
@@ -316,11 +316,11 @@ class Cestudio extends CI_Controller{
         $this->upload->do_upload($archivo);
         $upload_data = $this->upload->data();
         $this->email->initialize($config);
-        $this->email->from('mesadeayuda@hospital.uncu.edu.ar', 'Hospital Universitario');
+        $this->email->from('/////////////////////////', 'Hospital Universitario');
         $this->email->to($correo);        
         $this->email->subject('Informe Cardiologíco - Hospital Universitario');
         $this->email->message('Se adjunta informe de estudio Cardiológico, tiene problemas para visualizar el mismo
-        comuníquese al 4494220. Por favor no responda este correo.');
+        comuníquese al ///////////////. Por favor no responda este correo.');
         $this->email->attach($upload_data['full_path'].$archivo);
         var_dump( $upload_data['full_path'].$archivo );
         return $this->email->send();   

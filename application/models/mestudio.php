@@ -13,13 +13,6 @@ class Mestudio extends CI_Model{
         $resultado=$this->db->query($sql);        
         $resultado->result();
         return $resultado->result();
-    }
-    ///BUSCA RESULTADO POR DNI
-    public function mbuscarestudio($dni_paciente){
-        $sql='SELECT e.* FROM estudio e WHERE dni_paciente=? GROUP BY id_estudio';
-        $resultado=$this->db->query($sql,$dni_paciente);  
-        $resultado->result();
-        return $resultado->result();
     }    
     ///INSERTA
     public function minsertestudio($data){
@@ -41,6 +34,28 @@ class Mestudio extends CI_Model{
         $this->salutte = $this->load->database("salutte",TRUE);
         
         $this->salutte->select('e.email');
+        $this->salutte->from('persona e');
+        $this->salutte->where('e.documento=',$dni_paciente);
+        $this->salutte->limit(1);
+        $resultado = $this->salutte->get('persona');
+        return $resultado -> result();
+    }
+
+    public function buscarNombre($dni_paciente){
+        $this->salutte = $this->load->database("salutte",TRUE);
+        
+        $this->salutte->select('e.nombres');
+        $this->salutte->from('persona e');
+        $this->salutte->where('e.documento=',$dni_paciente);
+        $this->salutte->limit(1);
+        $resultado = $this->salutte->get('persona');
+        return $resultado -> result();
+    }
+
+    public function buscarApellido($dni_paciente){
+        $this->salutte = $this->load->database("salutte",TRUE);
+
+        $this->salutte->select('e.apellidos');
         $this->salutte->from('persona e');
         $this->salutte->where('e.documento=',$dni_paciente);
         $this->salutte->limit(1);

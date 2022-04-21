@@ -13,8 +13,6 @@
                         </a>
                         <ul class="treeview-menu">                             
 
-                            <li><a href="<?php echo base_url();?>mantenimiento/cestudio/cbuscar"><i class ="fa fa-circle-o"></i> Buscar Estudio </a></li>
-
                             <li><a href="<?php echo base_url();?>mantenimiento/cestudio/cenviar"><i class ="fa fa-circle-o"></i> Pendientes de envio </a></li>
                                
                             <li><a href="<?php echo base_url();?>mantenimiento/cestudio/ctodos"><i class ="fa fa-circle-o"></i> Todos los Estudios </a></li>                                                     

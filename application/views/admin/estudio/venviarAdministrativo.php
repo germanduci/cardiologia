@@ -19,6 +19,7 @@
                                     <th>ID</th>                                    
                                     <th>Estudio</th>
                                     <th>DNI Paciente</th>
+                                    <th>Paciente</th>
                                     <th>Email</th>
                                     <th>Archivo</th>
                                     <th>Usuario Alta</th>
@@ -27,6 +28,7 @@
                                     <th>Estado</th>
                                     <th>Fecha Envío</th>
                                     <th>Usuario Envio</th> 
+                                    <th class="text-center" >Modificar</th>
                                     <th class="text-center" >Enviar</th>
                                     <th class="text-center" >Entrega Personal</th>
                                 </tr>
@@ -38,6 +40,7 @@
                                             <td><?php echo $atributos->id_estudio;?></td>
                                             <td><?php echo $atributos->tipo_estudio;?></td>
                                             <td><?php echo $atributos->dni_paciente;?></td>
+                                            <td><?php echo $atributos->nombre_paciente;?></td>
                                             <td><?php echo $atributos->email;?></td>
                                             <td>
                                                 <div class="btn-group>">                          
@@ -60,7 +63,12 @@
                                             }?>                                            
                                             <td><?php echo $atributos->fecha_envio;?></td>
                                             <td><?php if (!empty($atributos->idusuario_envio)){echo $atributos->idusuario_envio;}else{echo "";}?></td>
-                                            <?php $data = $atributos->id_estudio."*".$atributos->tipo_estudio."*".$atributos->dni_paciente."*".$atributos->fecha_subida; ?>                                            
+                                            <?php $data = $atributos->id_estudio."*".$atributos->tipo_estudio."*".$atributos->dni_paciente."*".$atributos->fecha_subida; ?>
+                                            <td class="text-center" >
+                                                <div class="btn-group>">                                            
+                                                    <a href="<?php echo base_url();?>mantenimiento/cestudio/cedit/<?php echo $atributos->id_estudio;?>" class="btn btn-warning">
+                                                    <span class="fa fa-pencil"></span></a>
+                                            </td>                                             
                                             <td class="text-center" >                                           
                                                 <div class="btn-group>">
                                                     <?php if (str_contains($atributos->email, 'sin@correo')){?>                                                       

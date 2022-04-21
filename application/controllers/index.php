@@ -25,7 +25,7 @@ class index extends CI_Controller {
             }
         elseif($this->session->userdata('id_rol')==1){
             $this->load->view('layouts/header');
-            $this->load->view('layouts/asideMedico');
+            $this->load->view('layouts/aside');
             $this->load->view('admin/vdashboard',$data);
             $this->load->view('layouts/footer');
             }

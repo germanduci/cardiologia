@@ -59,54 +59,6 @@ class Cestudio extends CI_Controller{
         }
     }
 
-    public function cbuscar(){        
-        
-        if($this->session->userdata('id_rol')==8){
-            $this->load->view('layouts/header');
-            $this->load->view('layouts/asideMedico');
-            $this->load->view('admin/estudio/vbuscar');
-            $this->load->view('layouts/footer');
-            }
-        elseif($this->session->userdata('id_rol')==1){
-            $this->load->view('layouts/header');
-            $this->load->view('layouts/aside');
-            $this->load->view('admin/estudio/vbuscar');
-            $this->load->view('layouts/footer');
-            }
-        else{
-            $this->load->view('layouts/header');
-            $this->load->view('layouts/asideAdministrativo');
-            $this->load->view('admin/estudio/vbuscar');
-            $this->load->view('layouts/footer');
-            }
-    }
-
-    public function cbusqueda(){
-        $dni_paciente = $this -> input -> post('txtdni_paciente');
-        $data = array(
-            'estudioindex' =>$this->mestudio->mbuscarestudio($dni_paciente),
-        );         
-        
-        if($this->session->userdata('id_rol')==8){
-            $this->load->view('layouts/header');
-            $this->load->view('layouts/asideMedico');
-            $this->load->view('admin/estudio/venviarMedico',$data);
-            $this->load->view('layouts/footer');
-            }
-        elseif($this->session->userdata('id_rol')==1){
-            $this->load->view('layouts/header');
-            $this->load->view('layouts/aside');
-            $this->load->view('admin/estudio/venviar',$data);
-            $this->load->view('layouts/footer');
-            }
-        else{
-            $this->load->view('layouts/header');
-            $this->load->view('layouts/asideAdministrativo');
-            $this->load->view('admin/estudio/venviarAdministrativo',$data);
-            $this->load->view('layouts/footer');
-            }
-    }
-
     public function creporte(){         
         
         if($this->session->userdata('id_rol')==8){
@@ -181,6 +133,10 @@ class Cestudio extends CI_Controller{
     public function cinsert(){
         
         $dnipaciente        = $this->input->post('txtdni_paciente');
+        $npaciente    = $this->mestudio->buscarNombre($this->input->post('txtdni_paciente'));
+        $apaciente  = $this->mestudio->buscarApellido($this->input->post('txtdni_paciente'));
+        $nombre_paciente = $npaciente[0]->nombres;
+        $apellido_paciente = $apaciente[0]->apellidos;
         $fecha_estudio      = $this->input->post('txtfecha_estudio');
         $tipo_estudio       = $this->input->post('txttipo_estudio');
         date_default_timezone_set('America/Argentina/Mendoza');                
@@ -206,6 +162,8 @@ class Cestudio extends CI_Controller{
         if($this->form_validation->run()){
             $data=array(
                 'dni_paciente'      =>      $dnipaciente,
+                'nombre_paciente'   =>      $nombre_paciente,
+                'apellido_paciente' =>      $apellido_paciente,
                 'email'             =>      $email,
                 'fecha_estudio'     =>      $fecha_estudio,
                 'tipo_estudio'      =>      $tipo_estudio,
@@ -215,6 +173,7 @@ class Cestudio extends CI_Controller{
                 'idusuario_subido'  =>      $idusuario_subido,
                 'archivo'           =>      $archivo                
             );
+            
             $res=$this->mestudio->minsertestudio($data);
                 if($res){
                     $this->session->set_flashdata('correcto','Se guardo correctamente');

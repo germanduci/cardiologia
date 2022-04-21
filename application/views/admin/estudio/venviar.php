@@ -19,6 +19,8 @@
                                     <th>ID</th>                                    
                                     <th>Estudio</th>
                                     <th>DNI Paciente</th>
+                                    <th>Nombre</th>
+                                    <th>Apellido</th>
                                     <th>Email</th>
                                     <th>Archivo</th>
                                     <th>Usuario Alta</th>
@@ -39,6 +41,8 @@
                                             <td><?php echo $atributos->id_estudio;?></td>
                                             <td><?php echo $atributos->tipo_estudio;?></td>
                                             <td><?php echo $atributos->dni_paciente;?></td>
+                                            <td><?php echo $atributos->nombre_paciente;?></td>
+                                            <td><?php echo $atributos->apellido_paciente;?></td>
                                             <td><?php echo $atributos->email;?></td>
                                             <td>
                                                 <div class="btn-group>">                          

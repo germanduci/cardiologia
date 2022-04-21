@@ -20,6 +20,8 @@ header("Content-Disposition: attachment; filename=reporte_cardio_$date.xls");
                             <th>ID </th>
                             <th>Estudio</th>
                             <th>DNI Paciente</th>
+                            <th>Nombre</th>
+                            <th>Apellido</th>
                             <th>Medico</th>
                             <th>Fecha Estudio</th>
                             <th>Fecha Carga</th>
@@ -34,6 +36,8 @@ header("Content-Disposition: attachment; filename=reporte_cardio_$date.xls");
                                 <td>'.$row->id_estudio.'</td>
                                 <td>'.$row->tipo_estudio.'</td>
                                 <td>'.$row->dni_paciente.'</td>
+                                <td>'.$row->nombre_paciente.'</td>
+                                <td>'.$row->apellido_paciente.'</td>
                                 <td>'.$row->idusuario_subido.'</td>
                                 <td>'.$row->fecha_estudio.'</td>
                                 <td>'.$row->fecha_subida.'</td>
@@ -47,6 +51,8 @@ header("Content-Disposition: attachment; filename=reporte_cardio_$date.xls");
                                 <td>'.$row->id_estudio.'</td>
                                 <td>'.$row->tipo_estudio.'</td>
                                 <td>'.$row->dni_paciente.'</td>
+                                <td>'.$row->nombre_paciente.'</td>
+                                <td>'.$row->apellido_paciente.'</td>
                                 <td>'.$row->idusuario_subido.'</td>
                                 <td>'.$row->fecha_estudio.'</td>
                                 <td>'.$row->fecha_subida.'</td>
@@ -60,6 +66,8 @@ header("Content-Disposition: attachment; filename=reporte_cardio_$date.xls");
                                 <td>'.$row->id_estudio.'</td>
                                 <td>'.$row->tipo_estudio.'</td>
                                 <td>'.$row->dni_paciente.'</td>
+                                <td>'.$row->nombre_paciente.'</td>
+                                <td>'.$row->apellido_paciente.'</td>
                                 <td>'.$row->idusuario_subido.'</td>
                                 <td>'.$row->fecha_estudio.'</td>
                                 <td>'.$row->fecha_subida.'</td>
